@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -20,19 +18,17 @@ public class WordController {
 
     private final ProjectService service;
 
-    // Friendly landing response for "/"
+    // Root now returns the word + definitions (fresh random each call)
+    @Operation(summary = "Get a fresh random word with definitions (shown at /)")
     @GetMapping("/")
-    public Map<String, Object> index() {
-        return Map.of(
-                "name", "Word Challenge API",
-                "endpoints", new String[]{"/wordOfTheDay", "/h2-console", "/swagger-ui/index.html"},
-                "hint", "Call GET /wordOfTheDay to fetch a fresh random word with definitions."
-        );
+    public WordResponse index() {
+        return service.getTodayWord();
     }
 
-    @Operation(summary = "Get a random word with definitions (fresh on every call)")
+    // Keep this endpoint too (same payload, handy for API clients)
+    @Operation(summary = "Get a fresh random word with definitions")
     @GetMapping("/wordOfTheDay")
     public WordResponse getWordOfTheDay() {
-        return service.getTodayWord(); // now returns a fresh random word each time
+        return service.getTodayWord();
     }
 }

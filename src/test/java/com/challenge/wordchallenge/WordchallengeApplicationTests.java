@@ -8,6 +8,6 @@ class WordchallengeApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Just verifies the Spring context starts successfully.
 	}
-
 }
