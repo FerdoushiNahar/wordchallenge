@@ -7,7 +7,6 @@ A tiny Spring Boot 3 service that returns a **fresh random word** and its **defi
 - **Swagger UI:** `/swagger-ui/index.html`
 - **H2 console (dev only):** `/h2-console`
 
-> Note: the DB is not required for the live endpoint; it’s left in place for potential future features.
 
 ---
 
